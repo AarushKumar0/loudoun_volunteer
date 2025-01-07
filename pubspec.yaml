@@ -1,0 +1,45 @@
+name: loudoun_volunteer
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  path: ^1.9.0
+  sqflite: ^2.3.3+1
+  http: ^1.2.2
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/pics/mobileHope.png
+    - assets/pics/transitionalHousing.png
+    - assets/pics/morvenPark.png
+    - assets/pics/interfaithRelief.png
+    - assets/pics/arborAssistedLiving.png
+    - assets/pics/idaLeePark.jpg
+    - assets/pics/goodShepherd.png
+    - assets/pics/franklinPark.jpg
+    - assets/pics/bansheeReeks.jpg
+    - assets/pics/heritageFarm.jpg
+    - assets/pics/salvationArmy.jpg
+    - assets/pics/animalServices.jpg
+    - assets/pics/claudeMoore.jpg
+    - assets/pics/womenGivingBack.jpg
+    - assets/pics/aging.png
+    - assets/pics/mapping.jpg
+    - assets/pics/adamsCenter.png
+    - assets/pics/loudounCares.jpg
+    - assets/pics/loudounHungerRelief.jpg
