@@ -1,72 +1,139 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:loudoun_volunteer/db/database.dart';
 import 'package:loudoun_volunteer/utils/skillargument.dart';
 
-
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
-
 
   @override
   State<LogIn> createState() => _LogInState();
 }
 
-
 class _LogInState extends State<LogIn> {
   final userController = TextEditingController();
-
 
   void _showErrorDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Error'),
-        content: const Text('An account with that username doesn\'t exist.'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('OK'),
+      builder: (context) => Dialog(
+        backgroundColor: Colors.deepPurple.shade900.withOpacity(0.95),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Error',
+                style: TextStyle(
+                  color: Colors.amber.shade400,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'An account with that username doesn\'t exist.',
+                style: TextStyle(
+                  color: Colors.amber.shade100,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 28),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amber.shade400,
+                  foregroundColor: Colors.deepPurple.shade900,
+                  padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  elevation: 10,
+                  shadowColor: Colors.amber.shade400.withOpacity(0.7),
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 1.1),
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple.shade900,
       appBar: AppBar(
-        title: const Text('Log In'), // Added title for the AppBar
-        backgroundColor: Colors.amber.shade700, // Updated color for AppBar to match the theme
+        title: ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: [Colors.amber.shade400, Colors.deepOrange.shade400],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ).createShader(bounds),
+          child: const Text(
+            'Log In',
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 26,
+              letterSpacing: 1.3,
+              color: Colors.white,
+              shadows: [Shadow(color: Colors.black54, blurRadius: 3, offset: Offset(1, 1))],
+            ),
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+        ),
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 28),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
                 controller: userController,
-                decoration: const InputDecoration(
+                style: TextStyle(color: Colors.amber.shade100, fontWeight: FontWeight.w600),
+                cursorColor: Colors.amber.shade300,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.deepPurple.shade700.withOpacity(0.6),
                   hintText: 'Enter your username',
-                  hintStyle: TextStyle(color: Colors.black54), // Subtle hint color
-                  suffixIcon: Icon(Icons.search, color: Colors.black54), // Updated icon color
+                  hintStyle: TextStyle(color: Colors.amber.shade200.withOpacity(0.7)),
+                  suffixIcon: Icon(Icons.search, color: Colors.amber.shade300),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide.none,
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: Colors.amber.shade400, width: 2),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.amber.shade700, // Updated button color to match the theme
-                  foregroundColor: Colors.white, // Text color for button
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  backgroundColor: Colors.amber.shade400,
+                  foregroundColor: Colors.deepPurple.shade900,
+                  padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  elevation: 12,
+                  shadowColor: Colors.amber.shade400.withOpacity(0.8),
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    letterSpacing: 1.2,
                   ),
                 ),
                 onPressed: () async {
@@ -91,5 +158,3 @@ class _LogInState extends State<LogIn> {
     );
   }
 }
-
-
